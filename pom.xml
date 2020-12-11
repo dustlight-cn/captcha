@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <groupId>cn.dustlight.captcha</groupId>
+    <artifactId>captcha</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>captcha</name>
+    <description>CAPTCHA service for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <modules>
+        <module>captcha-core</module>
+        <module>extentions/redis-store</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>OSS Snapshots Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>OSS Staging Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <url>https://github.com/Hansin1997/captcha</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo,manual</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Hansin1997</name>
+            <email>hansin@dustlight.cn</email>
+            <url>https://github.com/Hansin1997</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/Hansin1997/captcha.git</connection>
+        <developerConnection>scm:git:https://github.com/Hansin1997/captcha.git</developerConnection>
+        <url>https://github.com/Hansin1997/captcha</url>
+    </scm>
+</project>
