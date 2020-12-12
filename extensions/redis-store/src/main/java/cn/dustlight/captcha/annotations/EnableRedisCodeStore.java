@@ -9,6 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({RedisCodeStoreConfiguration.class})
+@Deprecated
 public @interface EnableRedisCodeStore {
 
 }

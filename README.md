@@ -147,12 +147,19 @@ public class TestController {
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/captcha-core?server=https%3A%2F%2Foss.sonatype.org%2F)
 
 定义各种注解、接口、异常类，并提供默认实现类。
+
 ## 拓展模块
-### [redis-store](extentions/redis-store)
+### [redis-store](extensions/redis-store)
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/redis-store?server=https%3A%2F%2Foss.sonatype.org%2F)
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/redis-store?server=https%3A%2F%2Foss.sonatype.org%2F)
 
 提供基于 Redis 的验证码存储功能。
+
+### [tencent-sms](extensions/tencent-sms)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/tencent-sms?server=https%3A%2F%2Foss.sonatype.org%2F)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/tencent-sms?server=https%3A%2F%2Foss.sonatype.org%2F)
+
+提供基于腾讯云短信服务的验证码发送功能。
 
 ## 获取帮助
 如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/Hansin1997/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
