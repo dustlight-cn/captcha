@@ -17,7 +17,7 @@ public @interface Verifier {
      *
      * @return
      */
-    String value() default "defaultCodeVerifier";
+    String value() default "";
 
     /**
      * 验证器类型

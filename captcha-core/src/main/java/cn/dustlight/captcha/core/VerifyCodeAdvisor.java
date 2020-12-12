@@ -1,6 +1,7 @@
 package cn.dustlight.captcha.core;
 
 import cn.dustlight.captcha.annotations.VerifyCode;
+import cn.dustlight.captcha.configurations.DefaultBeanProperties;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
@@ -9,7 +10,11 @@ import org.springframework.beans.factory.BeanFactory;
 
 public class VerifyCodeAdvisor extends AbstractPointcutAdvisor {
 
-    private VerifyCodeInterceptor interceptor = new VerifyCodeInterceptor();
+    private VerifyCodeInterceptor interceptor;
+
+    public VerifyCodeAdvisor(DefaultBeanProperties defaultBeanProperties) {
+        this.interceptor = new VerifyCodeInterceptor(defaultBeanProperties);
+    }
 
     public Pointcut getPointcut() {
         return new AnnotationMatchingPointcut((Class) null, VerifyCode.class, true);

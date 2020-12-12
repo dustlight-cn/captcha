@@ -29,6 +29,12 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>9.0.37</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+            <version>2.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,6 +1,6 @@
 package cn.dustlight.captcha.annotations;
 
-import cn.dustlight.captcha.configuration.CaptchaConfiguration;
+import cn.dustlight.captcha.configurations.CaptchaConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 

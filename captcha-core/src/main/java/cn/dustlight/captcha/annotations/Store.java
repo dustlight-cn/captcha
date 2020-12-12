@@ -17,7 +17,7 @@ public @interface Store {
      *
      * @return
      */
-    String value() default "defaultCodeStore";
+    String value() default "";
 
     /**
      * 存储器类型

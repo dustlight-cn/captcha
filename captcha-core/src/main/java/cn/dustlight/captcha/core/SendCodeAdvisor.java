@@ -1,6 +1,7 @@
 package cn.dustlight.captcha.core;
 
 import cn.dustlight.captcha.annotations.SendCode;
+import cn.dustlight.captcha.configurations.DefaultBeanProperties;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
@@ -9,7 +10,11 @@ import org.springframework.beans.factory.BeanFactory;
 
 public class SendCodeAdvisor extends AbstractPointcutAdvisor {
 
-    private SendCodeInterceptor interceptor = new SendCodeInterceptor();
+    private SendCodeInterceptor interceptor;
+
+    public SendCodeAdvisor(DefaultBeanProperties defaultBeanProperties) {
+        this.interceptor = new SendCodeInterceptor(defaultBeanProperties);
+    }
 
     public Pointcut getPointcut() {
         return new AnnotationMatchingPointcut((Class) null, SendCode.class, true);

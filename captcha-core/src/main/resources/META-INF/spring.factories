@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.dustlight.captcha.configurations.HttpSessionCodeStoreConfiguration,\
+  cn.dustlight.captcha.configurations.RandomStringCodeGeneratorConfiguration,\
+  cn.dustlight.captcha.configurations.SimpleImageCodeSenderConfiguration,\
+  cn.dustlight.captcha.configurations.StringCodeVerifierConfiguration

@@ -17,7 +17,7 @@ public @interface Sender {
      *
      * @return
      */
-    String value() default "defaultCodeSender";
+    String value() default "";
 
     /**
      * 发送器类型

@@ -17,7 +17,7 @@ public @interface Generator {
      *
      * @return
      */
-    String value() default "defaultCodeGenerator";
+    String value() default "";
 
     /**
      * 生成器类型

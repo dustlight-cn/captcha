@@ -61,6 +61,7 @@ public class TencentSmsSender implements CodeSender<String> {
             if (paramSet == null)
                 paramSet = new String[]{code.getValue()};
             request.setTemplateParamSet(paramSet);
+
             this.client.SendSms(request);
         } catch (Exception e) {
             if (e instanceof SendCodeException)

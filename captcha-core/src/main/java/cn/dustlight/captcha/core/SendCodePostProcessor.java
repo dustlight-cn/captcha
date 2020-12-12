@@ -1,12 +1,13 @@
 package cn.dustlight.captcha.core;
 
+import cn.dustlight.captcha.configurations.DefaultBeanProperties;
 import org.springframework.aop.framework.autoproxy.AbstractBeanFactoryAwareAdvisingPostProcessor;
 import org.springframework.beans.factory.BeanFactory;
 
 public class SendCodePostProcessor extends AbstractBeanFactoryAwareAdvisingPostProcessor {
 
-    public SendCodePostProcessor() {
-        this.advisor = new SendCodeAdvisor();
+    public SendCodePostProcessor(DefaultBeanProperties defaultBeanProperties) {
+        this.advisor = new SendCodeAdvisor(defaultBeanProperties);
     }
 
     @Override

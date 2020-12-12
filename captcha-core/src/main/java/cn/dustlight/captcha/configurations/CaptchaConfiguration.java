@@ -1,17 +1,11 @@
-package cn.dustlight.captcha.configuration;
+package cn.dustlight.captcha.configurations;
 
 import cn.dustlight.captcha.annotations.EnableCaptcha;
 import cn.dustlight.captcha.core.SendCodePostProcessor;
 import cn.dustlight.captcha.core.VerifyCodePostProcessor;
-import cn.dustlight.captcha.generator.CodeGenerator;
-import cn.dustlight.captcha.generator.RandomStringCodeGenerator;
-import cn.dustlight.captcha.sender.CodeSender;
-import cn.dustlight.captcha.sender.SimpleImageCodeSender;
-import cn.dustlight.captcha.store.CodeStore;
-import cn.dustlight.captcha.store.HttpSessionCodeStore;
-import cn.dustlight.captcha.verifier.CodeVerifier;
-import cn.dustlight.captcha.verifier.StringCodeVerifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportAware;
@@ -24,6 +18,7 @@ import org.springframework.lang.Nullable;
         proxyBeanMethods = false
 )
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+@EnableConfigurationProperties(DefaultBeanProperties.class)
 public class CaptchaConfiguration implements ImportAware {
 
     @Nullable
@@ -39,8 +34,8 @@ public class CaptchaConfiguration implements ImportAware {
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    public SendCodePostProcessor sendCodePostProcessor() {
-        SendCodePostProcessor sendCodePostProcessor = new SendCodePostProcessor();
+    public SendCodePostProcessor sendCodePostProcessor(@Autowired DefaultBeanProperties defaultBeanProperties) {
+        SendCodePostProcessor sendCodePostProcessor = new SendCodePostProcessor(defaultBeanProperties);
         if (attrs != null) {
             sendCodePostProcessor.setProxyTargetClass(attrs.getBoolean("proxyTargetClass"));
             sendCodePostProcessor.setOrder(attrs.getNumber("orderOfSend"));
@@ -50,37 +45,12 @@ public class CaptchaConfiguration implements ImportAware {
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    public VerifyCodePostProcessor verifyCodePostProcessor() {
-        VerifyCodePostProcessor verifyCodePostProcessor = new VerifyCodePostProcessor();
+    public VerifyCodePostProcessor verifyCodePostProcessor(@Autowired DefaultBeanProperties defaultBeanProperties) {
+        VerifyCodePostProcessor verifyCodePostProcessor = new VerifyCodePostProcessor(defaultBeanProperties);
         if (attrs != null) {
             verifyCodePostProcessor.setProxyTargetClass(attrs.getBoolean("proxyTargetClass"));
             verifyCodePostProcessor.setOrder(attrs.getNumber("orderOfVerify"));
         }
         return verifyCodePostProcessor;
     }
-
-    @Bean
-    public CodeGenerator defaultCodeGenerator() {
-        RandomStringCodeGenerator generator = new RandomStringCodeGenerator();
-        return generator;
-    }
-
-    @Bean
-    public CodeStore defaultCodeStore() {
-        HttpSessionCodeStore store = new HttpSessionCodeStore();
-        return store;
-    }
-
-    @Bean
-    public CodeSender defaultCodeSender() {
-        SimpleImageCodeSender sender = new SimpleImageCodeSender();
-        return sender;
-    }
-
-    @Bean
-    public CodeVerifier defaultCodeVerifier() {
-        StringCodeVerifier verifier = new StringCodeVerifier();
-        return verifier;
-    }
-
 }

@@ -4,6 +4,7 @@ import cn.dustlight.captcha.Util;
 import cn.dustlight.captcha.annotations.CodeParam;
 import cn.dustlight.captcha.annotations.CodeValue;
 import cn.dustlight.captcha.annotations.VerifyCode;
+import cn.dustlight.captcha.configurations.DefaultBeanProperties;
 import cn.dustlight.captcha.store.CodeStore;
 import cn.dustlight.captcha.verifier.CodeVerifier;
 import cn.dustlight.captcha.verifier.VerifyCodeException;
@@ -11,6 +12,7 @@ import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -20,6 +22,11 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
 
     private BeanFactory factory;
     private int order;
+    private DefaultBeanProperties defaultBeanProperties;
+
+    public VerifyCodeInterceptor(DefaultBeanProperties defaultBeanProperties) {
+        this.defaultBeanProperties = defaultBeanProperties;
+    }
 
     boolean checkChance(Code code, int chance) {
         if (code.getData().get("CHANCE") == null)
@@ -45,8 +52,12 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
         /**
          * 获取Bean
          */
-        CodeStore store = Util.getBean(factory, verifyCodeAnnotation.store().value(), verifyCodeAnnotation.store().type());
-        CodeVerifier verifier = Util.getBean(factory, verifyCodeAnnotation.verifier().value(), verifyCodeAnnotation.verifier().type());
+        CodeStore store = StringUtils.isEmpty(verifyCodeAnnotation.store().value()) ?
+                Util.getBean(factory, defaultBeanProperties.getStore().getName(), defaultBeanProperties.getStore().getType()) :
+                Util.getBean(factory, verifyCodeAnnotation.store().value(), verifyCodeAnnotation.store().type());
+        CodeVerifier verifier = StringUtils.isEmpty(verifyCodeAnnotation.verifier().value()) ?
+                Util.getBean(factory, defaultBeanProperties.getVerifier().getName(), defaultBeanProperties.getVerifier().getType()) :
+                Util.getBean(factory, verifyCodeAnnotation.verifier().value(), verifyCodeAnnotation.verifier().type());
 
         Map<String, Object> parameters = Util.getParameters(method, objects); // 获取方法参数
         for (cn.dustlight.captcha.annotations.Parameter parameter : verifyCodeAnnotation.parameters())
