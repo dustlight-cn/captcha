@@ -17,6 +17,7 @@
         <module>captcha-core</module>
         <module>extensions/redis-store</module>
         <module>extensions/tencent-sms</module>
+        <module>extensions/reCAPTCHA</module>
     </modules>
 
     <build>
