@@ -1,6 +1,6 @@
 # reCAPTCHA
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/redis-store?server=https%3A%2F%2Foss.sonatype.org%2F)
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/redis-store?server=https%3A%2F%2Foss.sonatype.org%2F)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/recaptcha?server=https%3A%2F%2Foss.sonatype.org%2F)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/recaptcha?server=https%3A%2F%2Foss.sonatype.org%2F)
 
 ## 简介
 **reCAPTCHA** 是 **[CAPTCHA](../../)** 项目的一个拓展，提供基于谷歌 [reCAPTCHA](https://www.google.com/recaptcha/about/) 人机识别的验证服务。
