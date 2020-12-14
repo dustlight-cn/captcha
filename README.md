@@ -7,7 +7,6 @@
 **CAPTCHA** 是一个基于 **Spring Boot** 框架的验证码框架，它通过 AOP 的方式完成包含验证码生成、发送、存储等验证码相关业务，以避免与业务代码耦合。
 开发者可以轻松地通过不同组件的组合来完成验证业务，同时可以进行自定义实现以应对自身的业务需求（例如邮箱验证码、短信验证码）。
 
-
 ## 示例
 * [图片验证码](#快速入门)
 * [短信验证码](extensions/tencent-sms)
@@ -18,7 +17,7 @@
 * [简介](#简介)
 * [示例](#示例)
 * [快速入门](#快速入门)
-* [业务逻辑](#业务逻辑)
+* [原理](#原理)
 * [核心模块](#核心模块)
 * [拓展模块](#拓展模块)
 * [获取帮助](#获取帮助)
@@ -32,18 +31,8 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha-core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 </dependency>
-```
-如果版本是以 SNAPSHOT 结尾的快照版本，需要添加 Maven 仓库：
-```xml
-<repositories>
-    <repository>
-        <id>sonatype-oss-snapshots</id>
-        <name>Sonatype OSS Snapshots Repository</name>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-</repositories>
 ```
 
 ### 启用 CAPTCHA
@@ -117,7 +106,7 @@ public class TestController {
 在访问注解 @SendCode 所标注的方法 captcha 之前，会生成随机字符串验证码并以图片形式发送。
 访问注解 @VerifyCode 所标注的方法 index 前会对参数中的验证码进行验证，成功验证后才会执行 index 方法的业务。
 
-## 业务逻辑
+## 原理
 **CAPTCHA** 基于面向切面编程（AOP）思想，将验证码业务划分为两个切面：
 - @SendCode
     1. 生成验证码

@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>captcha</name>
     <description>CAPTCHA service parent project for Spring Boot</description>
 
@@ -32,7 +32,7 @@
             <dependency>
                 <groupId>cn.dustlight.captcha</groupId>
                 <artifactId>captcha-core</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

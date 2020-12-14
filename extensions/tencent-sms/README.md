@@ -20,18 +20,8 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>tencent-sms</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 </dependency>
-```
-如果版本是以 SNAPSHOT 结尾的快照版本，需要添加 Maven 仓库：
-```xml
-<repositories>
-    <repository>
-        <id>sonatype-oss-snapshots</id>
-        <name>Sonatype OSS Snapshots Repository</name>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-</repositories>
 ```
 
 ### 配置文件
