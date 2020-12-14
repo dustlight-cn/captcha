@@ -23,7 +23,7 @@ public class SimpleImageCodeSenderConfiguration {
     @ConfigurationProperties("dustlight.captcha.sender.simple-image")
     public static class SimpleImageCodeSenderProperties {
 
-        private int width = 200, height = 100;
+        private int width = 100, height = 50;
         private String[] fonts = new String[]{"Georgia"};
 
         public int getWidth() {

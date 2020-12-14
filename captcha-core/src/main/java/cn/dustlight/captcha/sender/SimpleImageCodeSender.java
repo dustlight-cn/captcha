@@ -13,7 +13,6 @@ import java.io.BufferedOutputStream;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class SimpleImageCodeSender<T> implements CodeSender<T> {
@@ -85,20 +84,21 @@ public class SimpleImageCodeSender<T> implements CodeSender<T> {
     public static class DefaultImageHandler implements ImageHandler {
 
         private SecureRandom secureRandom;
-        private String[] fonts;
+        private String font;
 
         public DefaultImageHandler(String... fontNames) {
             this.secureRandom = new SecureRandom();
-            Collection<String> fonts = new LinkedHashSet<>();
+            Collection<String> availableFonts = Arrays.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
             if (fontNames != null) {
                 for (String fn : fontNames) {
-                    if (fn != null && fn.trim().length() > 0)
-                        fonts.add(fn);
+                    if (fn != null && fn.trim().length() > 0 && availableFonts.contains(fn)) {
+                        this.font = fn;
+                        break;
+                    }
                 }
             }
-            if (fonts.isEmpty())
-                fonts.add("Georgia");
-            this.fonts = fonts.toArray(new String[0]);
+            if (this.font == null || this.font.trim().length() == 0)
+                this.font = "Georgia";
         }
 
         public BufferedImage getImage(String code, int width, int height, Map<String, Object> parameters) {
@@ -153,7 +153,7 @@ public class SimpleImageCodeSender<T> implements CodeSender<T> {
 
             g2.setColor(getRandColor(100, 160));
             int fontSize = height - 4;
-            Font font = new Font("Algerian", Font.ITALIC, fontSize);
+            Font font = new Font(this.font, Font.ITALIC, fontSize);
             g2.setFont(font);
             char[] chars = code.toCharArray();
             for (int i = 0; i < verifySize; i++) {
