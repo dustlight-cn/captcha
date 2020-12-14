@@ -3,7 +3,7 @@
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/captcha-core?server=https%3A%2F%2Foss.sonatype.org%2F)
 
 ## 简介
-**captcha-core** 是 **[CAPTCHA](../../)** 项目的核心模块，提供验证码业务的抽象接口、注解以及一些默认实现。
+**captcha-core** 是 **[CAPTCHA](../)** 项目的核心模块，提供验证码业务的抽象接口、注解以及一些默认实现。
 
 ## 核心组件
 * 抽象接口
