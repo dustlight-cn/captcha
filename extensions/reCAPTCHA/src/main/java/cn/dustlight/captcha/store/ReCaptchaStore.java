@@ -44,10 +44,10 @@ public class ReCaptchaStore implements CodeStore<ReCaptchaResult> {
             map.add("remoteip", remoteIp);
             map.add("response", request.getParameter(parameters.getOrDefault("PARAM_NAME", properties.getDefaultParameterName()).toString()));
             map.add("secret", parameters.getOrDefault("SECRET", properties.getDefaultSecret()));
-            HttpEntity<MultiValueMap<String, String>> data = new HttpEntity(map, headers);
+            HttpEntity<MultiValueMap<String, Object>> data = new HttpEntity<>(map, headers);
 
             ReCaptchaResult result = getResult(data, properties.getEndpoint(), restTemplate);
-            return new DefaultCode(result);
+            return new DefaultCode<>(result);
         } catch (Exception e) {
             if (e instanceof LoadCodeException)
                 throw e;
@@ -60,7 +60,7 @@ public class ReCaptchaStore implements CodeStore<ReCaptchaResult> {
 //        throw new RemoveCodeException("ReCaptchaStore couldn't remove code!");
     }
 
-    protected ReCaptchaResult getResult(HttpEntity data, String url, RestTemplate template) {
+    protected ReCaptchaResult getResult(Object data, String url, RestTemplate template) {
         ReCaptchaResult result = template.postForEntity(url, data, ReCaptchaResult.class).getBody();
         return result;
     }

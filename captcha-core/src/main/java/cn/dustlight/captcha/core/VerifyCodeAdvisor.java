@@ -17,7 +17,7 @@ public class VerifyCodeAdvisor extends AbstractPointcutAdvisor {
     }
 
     public Pointcut getPointcut() {
-        return new AnnotationMatchingPointcut((Class) null, VerifyCode.class, true);
+        return new AnnotationMatchingPointcut(null, VerifyCode.class, true);
     }
 
     public Advice getAdvice() {

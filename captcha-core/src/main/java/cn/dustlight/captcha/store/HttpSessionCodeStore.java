@@ -25,14 +25,15 @@ public class HttpSessionCodeStore<T> implements CodeStore<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Code<T> load(String name, Map<String, Object> parameters) throws LoadCodeException {
         try {
             HttpSession session = getSession(false);
-            Object val = null;
+            Object val;
             if (session == null || (val = session.getAttribute(name)) == null)
                 throw new CodeNotExistsException("Code does not exists");
-            return (Code) val;
+            return (Code<T>) val;
         } catch (Exception e) {
             if (e instanceof CaptchaException)
                 throw e;

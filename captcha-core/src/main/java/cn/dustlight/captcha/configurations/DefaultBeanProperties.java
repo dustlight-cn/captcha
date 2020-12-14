@@ -6,6 +6,7 @@ import cn.dustlight.captcha.store.CodeStore;
 import cn.dustlight.captcha.verifier.CodeVerifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@SuppressWarnings("unchecked")
 @ConfigurationProperties("dustlight.captcha.default")
 public class DefaultBeanProperties {
 

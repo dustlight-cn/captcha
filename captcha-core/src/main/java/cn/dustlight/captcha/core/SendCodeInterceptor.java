@@ -28,19 +28,20 @@ public class SendCodeInterceptor implements MethodBeforeAdvice, Ordered {
         this.defaultBeanProperties = defaultBeanProperties;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void before(Method method, Object[] objects, Object o) throws Throwable {
         SendCode sendCodeAnnotation = AnnotationUtils.findAnnotation(method, SendCode.class); // 获取注解
         /*
          * 获取Bean
          */
-        CodeGenerator generator = StringUtils.isEmpty(sendCodeAnnotation.generator().value()) ?
+        CodeGenerator generator = !StringUtils.hasText(sendCodeAnnotation.generator().value()) ?
                 Util.getBean(factory, defaultBeanProperties.getGenerator().getName(), defaultBeanProperties.getGenerator().getType()) :
                 Util.getBean(factory, sendCodeAnnotation.generator().value(), sendCodeAnnotation.generator().type());
-        CodeStore store = StringUtils.isEmpty(sendCodeAnnotation.store().value()) ?
+        CodeStore store = !StringUtils.hasText(sendCodeAnnotation.store().value()) ?
                 Util.getBean(factory, defaultBeanProperties.getStore().getName(), defaultBeanProperties.getStore().getType()) :
                 Util.getBean(factory, sendCodeAnnotation.store().value(), sendCodeAnnotation.store().type());
-        CodeSender sender = StringUtils.isEmpty(sendCodeAnnotation.sender().value()) ?
+        CodeSender sender = !StringUtils.hasText(sendCodeAnnotation.sender().value()) ?
                 Util.getBean(factory, defaultBeanProperties.getSender().getName(), defaultBeanProperties.getSender().getType()) :
                 Util.getBean(factory, sendCodeAnnotation.sender().value(), sendCodeAnnotation.sender().type());
 

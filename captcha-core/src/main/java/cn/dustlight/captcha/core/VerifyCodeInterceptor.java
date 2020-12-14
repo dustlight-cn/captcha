@@ -37,6 +37,7 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     void addChanceCount(Code code) {
         if (code.getData().get("CHANCE") == null) {
             code.getData().put("CHANCE", 1);
@@ -46,16 +47,17 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
         code.getData().put("CHANCE", CHANCE + 1);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void before(Method method, Object[] objects, Object o) throws Throwable {
         VerifyCode verifyCodeAnnotation = AnnotationUtils.findAnnotation(method, VerifyCode.class); // 搜索注解
         /**
          * 获取Bean
          */
-        CodeStore store = StringUtils.isEmpty(verifyCodeAnnotation.store().value()) ?
+        CodeStore store = !StringUtils.hasText(verifyCodeAnnotation.store().value()) ?
                 Util.getBean(factory, defaultBeanProperties.getStore().getName(), defaultBeanProperties.getStore().getType()) :
                 Util.getBean(factory, verifyCodeAnnotation.store().value(), verifyCodeAnnotation.store().type());
-        CodeVerifier verifier = StringUtils.isEmpty(verifyCodeAnnotation.verifier().value()) ?
+        CodeVerifier verifier = !StringUtils.hasText(verifyCodeAnnotation.verifier().value()) ?
                 Util.getBean(factory, defaultBeanProperties.getVerifier().getName(), defaultBeanProperties.getVerifier().getType()) :
                 Util.getBean(factory, verifyCodeAnnotation.verifier().value(), verifyCodeAnnotation.verifier().type());
 

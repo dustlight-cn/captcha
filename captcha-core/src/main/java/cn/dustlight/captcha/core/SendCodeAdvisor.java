@@ -17,7 +17,7 @@ public class SendCodeAdvisor extends AbstractPointcutAdvisor {
     }
 
     public Pointcut getPointcut() {
-        return new AnnotationMatchingPointcut((Class) null, SendCode.class, true);
+        return new AnnotationMatchingPointcut(null, SendCode.class, true);
     }
 
     public Advice getAdvice() {

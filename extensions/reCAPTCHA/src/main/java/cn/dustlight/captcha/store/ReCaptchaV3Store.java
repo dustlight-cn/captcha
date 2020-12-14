@@ -13,7 +13,7 @@ public class ReCaptchaV3Store extends ReCaptchaStore {
     }
 
     @Override
-    protected ReCaptchaResult getResult(HttpEntity data, String url, RestTemplate template) {
+    protected ReCaptchaResult getResult(Object data, String url, RestTemplate template) {
         ReCaptchaResult result = template.postForEntity(url, data, ReCaptchaV3Result.class).getBody();
         return result;
     }
