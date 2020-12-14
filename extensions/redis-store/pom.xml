@@ -8,7 +8,6 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <groupId>cn.dustlight.captcha</groupId>
     <artifactId>redis-store</artifactId>
     <name>redis-store</name>
     <description>CAPTCHA service Redis store module</description>

@@ -8,7 +8,6 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha-core</artifactId>
     <name>captcha-core</name>
     <description>CAPTCHA service core module</description>
@@ -30,7 +29,6 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.37</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
