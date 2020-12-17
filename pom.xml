@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>captcha</name>
     <description>CAPTCHA service parent project for Spring Boot</description>
 
@@ -25,6 +25,7 @@
         <module>extensions/redis-store</module>
         <module>extensions/tencent-sms</module>
         <module>extensions/reCAPTCHA</module>
+        <module>extensions/email-sender</module>
     </modules>
 
     <dependencyManagement>
@@ -32,7 +33,7 @@
             <dependency>
                 <groupId>cn.dustlight.captcha</groupId>
                 <artifactId>captcha-core</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
