@@ -10,6 +10,7 @@
 ## 示例
 * [图片验证码](#快速入门)
 * [短信验证码](extensions/tencent-sms)
+* [邮箱验证码](extensions/email-sender)
 * [谷歌 reCAPTCHA](extensions/reCAPTCHA)
 * [使用 Redis 储存验证码](extensions/redis-store)
 
