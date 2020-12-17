@@ -7,6 +7,7 @@ import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class TencentSmsSender implements CodeSender<String> {
             request.setSenderId(getSenderId(parameters));
             request.setTemplateID(getTemplateId(parameters));
 
-            String phoneParamName = getPhoneParamName(parameters);
+            String phoneParamName = getPhoneParamName();
 
             if (!parameters.containsKey(phoneParamName) || parameters.get(phoneParamName) == null)
                 throw new SendCodeException(String.format("Parameter '%s' not found!", phoneParamName));
@@ -102,7 +103,7 @@ public class TencentSmsSender implements CodeSender<String> {
         return (String) parameters.getOrDefault("TEMPLATE_ID", properties.getDefaultTemplateId());
     }
 
-    protected String getPhoneParamName(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault(properties.getPhoneParamName(), "phone");
+    protected String getPhoneParamName() {
+        return StringUtils.hasText(properties.getPhoneParamName()) ? properties.getPhoneParamName() : "phone";
     }
 }

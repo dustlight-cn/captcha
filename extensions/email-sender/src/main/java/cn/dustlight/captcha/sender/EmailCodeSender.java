@@ -8,6 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.util.StringUtils;
 
 import javax.mail.internet.MimeMessage;
 import java.io.*;
@@ -38,7 +39,7 @@ public class EmailCodeSender implements CodeSender<String> {
             String template = getTemplate(parameters);
             if (template == null)
                 throw new SendCodeException("Email template not found!");
-            String emailParamName = getEmailParam(parameters);
+            String emailParamName = getEmailParam();
             if (!parameters.containsKey(emailParamName) || parameters.get(emailParamName) == null)
                 throw new SendCodeException(String.format("Parameter '%s' not found!", emailParamName));
             String email = parameters.get(emailParamName).toString();
@@ -65,8 +66,8 @@ public class EmailCodeSender implements CodeSender<String> {
         this.templateProvider = templateProvider;
     }
 
-    protected String getEmailParam(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault(properties.getEmailParamName(), "email");
+    protected String getEmailParam() {
+        return StringUtils.hasText(properties.getEmailParamName()) ? properties.getEmailParamName() : "email";
     }
 
     protected String getTemplate(Map<String, Object> parameters) throws Exception {
