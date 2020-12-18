@@ -12,7 +12,17 @@ public class TencentSmsProperties {
             httpEndpoint,
             signMethod = "TC3-HMAC-SHA256";
 
+    private String phoneParamName = "phone";
+
     private Integer httpProxyPort, httpTimeout = 60;
+
+    public String getPhoneParamName() {
+        return phoneParamName;
+    }
+
+    public void setPhoneParamName(String phoneParamName) {
+        this.phoneParamName = phoneParamName;
+    }
 
     public String getHttpProxyUsername() {
         return httpProxyUsername;

@@ -8,9 +8,9 @@
         <version>0.0.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>tencent-sms</artifactId>
-    <name>tencent-sms</name>
-    <description>CAPTCHA service Tencent Short Message Service module</description>
+    <artifactId>email-sender</artifactId>
+    <name>email-sender</name>
+    <description>CAPTCHA service Email sender</description>
 
     <dependencies>
         <dependency>
@@ -19,9 +19,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>4.0.11</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
         <dependency>
@@ -29,7 +33,6 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
 
     <build>

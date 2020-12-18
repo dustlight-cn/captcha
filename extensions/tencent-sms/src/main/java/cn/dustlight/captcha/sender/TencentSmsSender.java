@@ -7,13 +7,14 @@ import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
 public class TencentSmsSender implements CodeSender<String> {
 
-    private TencentSmsProperties properties;
-    private SmsClient client;
+    private final TencentSmsProperties properties;
+    private final SmsClient client;
 
     public TencentSmsSender(TencentSmsProperties properties) {
         this.properties = properties;
@@ -54,9 +55,12 @@ public class TencentSmsSender implements CodeSender<String> {
             request.setSenderId(getSenderId(parameters));
             request.setTemplateID(getTemplateId(parameters));
 
-            if (!parameters.containsKey("phone") || parameters.get("phone") == null)
-                throw new SendCodeException("Parameter 'phone' not found!");
-            request.setPhoneNumberSet(new String[]{parameters.get("phone").toString()});
+            String phoneParamName = getPhoneParamName();
+
+            if (!parameters.containsKey(phoneParamName) || parameters.get(phoneParamName) == null)
+                throw new SendCodeException(String.format("Parameter '%s' not found!", phoneParamName));
+
+            request.setPhoneNumberSet(new String[]{parameters.get(phoneParamName).toString()});
             String[] paramSet = getParamSet(parameters);
             if (paramSet == null)
                 paramSet = new String[]{code.getValue()};
@@ -76,7 +80,7 @@ public class TencentSmsSender implements CodeSender<String> {
         String[] paramName = parameters.get("PARAMS").toString().split(",");
         String[] values = new String[paramName.length];
         for (int i = 0; i < paramName.length; i++) {
-            if (parameters.get(paramName[i]) == null)
+            if (!parameters.containsKey(paramName[i]) || parameters.get(paramName[i]) == null)
                 continue;
             values[i] = parameters.get(paramName[i]).toString();
         }
@@ -97,5 +101,9 @@ public class TencentSmsSender implements CodeSender<String> {
 
     protected String getTemplateId(Map<String, Object> parameters) {
         return (String) parameters.getOrDefault("TEMPLATE_ID", properties.getDefaultTemplateId());
+    }
+
+    protected String getPhoneParamName() {
+        return StringUtils.hasText(properties.getPhoneParamName()) ? properties.getPhoneParamName() : "phone";
     }
 }
