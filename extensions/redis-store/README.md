@@ -86,4 +86,4 @@ dustlight.captcha.store.redis.key-prefix=CAPTCHA_CODE
 ```
 
 ## 获取帮助
-如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/Hansin1997/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
+如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/dustlight-cn/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)

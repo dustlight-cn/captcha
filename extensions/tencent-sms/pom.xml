@@ -5,7 +5,7 @@
     <parent>
         <groupId>cn.dustlight.captcha</groupId>
         <artifactId>captcha</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>tencent-sms</artifactId>
@@ -57,20 +57,7 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <name>OSS Snapshots Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <name>OSS Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
-    <url>https://github.com/Hansin1997/captcha</url>
+    <url>https://github.com/dustlight-cn/captcha</url>
 
     <licenses>
         <license>
@@ -89,9 +76,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/Hansin1997/captcha.git</connection>
-        <developerConnection>scm:git:https://github.com/Hansin1997/captcha.git</developerConnection>
-        <url>https://github.com/Hansin1997/captcha</url>
+        <connection>scm:git:https://github.com/dustlight-cn/captcha.git</connection>
+        <developerConnection>scm:git:https://github.com/dustlight-cn/captcha.git</developerConnection>
+        <url>https://github.com/dustlight-cn/captcha</url>
     </scm>
 
 </project>

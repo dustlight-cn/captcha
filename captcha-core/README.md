@@ -34,4 +34,4 @@
 [StringCodeVerifier](src/main/java/cn/dustlight/captcha/verifier/StringCodeVerifier.java) 是验证码校验器的默认实现，它将验证码值作为字符串进行比较，可以选择是否裁剪空白以及大小写敏感。
 
 ## 获取帮助
-如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/Hansin1997/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
+如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/dustlight-cn/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)

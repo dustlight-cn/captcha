@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>captcha</name>
     <description>CAPTCHA service parent project for Spring Boot</description>
 
@@ -154,7 +154,7 @@
         </repository>
     </distributionManagement>
 
-    <url>https://github.com/Hansin1997/captcha</url>
+    <url>https://github.com/dustlight-cn/captcha</url>
 
     <licenses>
         <license>
@@ -173,8 +173,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/Hansin1997/captcha.git</connection>
-        <developerConnection>scm:git:https://github.com/Hansin1997/captcha.git</developerConnection>
-        <url>https://github.com/Hansin1997/captcha</url>
+        <connection>scm:git:https://github.com/dustlight-cn/captcha.git</connection>
+        <developerConnection>scm:git:https://github.com/dustlight-cn/captcha.git</developerConnection>
+        <url>https://github.com/dustlight-cn/captcha</url>
     </scm>
 </project>
