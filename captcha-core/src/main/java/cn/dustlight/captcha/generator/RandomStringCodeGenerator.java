@@ -29,8 +29,8 @@ public class RandomStringCodeGenerator implements CodeGenerator<String> {
 
     public Code<String> generate(String name, Map<String, Object> parameters) throws GenerateCodeException {
         try {
-            int len = this.length;
-            char[] chars = this.chars;
+            int len = length(parameters);
+            char[] chars = chars(parameters);
             StringBuilder builder = new StringBuilder(length);
             for (int i = 0; i < len; i++)
                 builder.append(chars[secureRandom.nextInt(chars.length)]);
@@ -56,5 +56,21 @@ public class RandomStringCodeGenerator implements CodeGenerator<String> {
 
     public int getLength() {
         return length;
+    }
+
+    private char[] chars(Map<String, Object> parameters) {
+        if (parameters == null ||
+                !parameters.containsKey("CODE_CHARS") ||
+                parameters.get("CODE_CHARS") == null)
+            return this.chars;
+        return parameters.get("CODE_CHARS").toString().toCharArray();
+    }
+
+    private int length(Map<String, Object> parameters) {
+        if (parameters == null ||
+                !parameters.containsKey("CODE_LENGTH") ||
+                parameters.get("CODE_LENGTH") == null)
+            return this.length;
+        return Integer.parseInt(parameters.get("CODE_LENGTH").toString());
     }
 }

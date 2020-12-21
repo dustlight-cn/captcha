@@ -1,7 +1,7 @@
 # CAPTCHA
-[![Build Status](https://travis-ci.org/Hansin1997/captcha.svg?branch=main)](https://travis-ci.org/Hansin1997/captcha) 
-[![GitHub](https://img.shields.io/github/license/Hansin1997/captcha)](LICENSE)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Hansin1997/captcha)](https://github.com/Hansin1997/captcha/releases)
+[![Build Status](https://travis-ci.org/dustlight-cn/captcha.svg?branch=main)](https://travis-ci.org/dustlight-cn/captcha) 
+[![GitHub](https://img.shields.io/github/license/dustlight-cn/captcha)](LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/dustlight-cn/captcha)](https://github.com/dustlight-cn/captcha/releases)
 
 ## 简介
 **CAPTCHA** 是一个基于 **Spring Boot** 框架的验证码框架，它通过 AOP 的方式完成包含验证码生成、发送、存储等验证码相关业务，以避免与业务代码耦合。
@@ -157,4 +157,4 @@ public class TestController {
 集成邮箱验证码发送功能。
 
 ## 获取帮助
-如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/Hansin1997/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
+如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/dustlight-cn/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)

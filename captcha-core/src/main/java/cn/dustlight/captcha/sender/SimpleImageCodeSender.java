@@ -37,7 +37,10 @@ public class SimpleImageCodeSender<T> implements CodeSender<T> {
         try {
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletResponse response = requestAttributes.getResponse();
-            image = imageHandler.getImage(code.getValue().toString(), width, height, parameters);
+            image = imageHandler.getImage(code.getValue().toString(),
+                    width(parameters),
+                    height(parameters),
+                    parameters);
             response.setStatus(200);
             response.setContentType("image/jpeg");
             ImageIO.write(image, "jpeg", new BufferedOutputStream(response.getOutputStream()));
@@ -51,6 +54,22 @@ public class SimpleImageCodeSender<T> implements CodeSender<T> {
                 throw new SendCodeException("Dispose image fail", e1);
             }
         }
+    }
+
+    private int width(Map<String, Object> parameters) {
+        if (parameters == null ||
+                !parameters.containsKey("IMAGE_WIDTH") ||
+                parameters.get("IMAGE_WIDTH") == null)
+            return this.width;
+        return Integer.parseInt(parameters.get("IMAGE_WIDTH").toString());
+    }
+
+    private int height(Map<String, Object> parameters) {
+        if (parameters == null ||
+                !parameters.containsKey("IMAGE_HEIGHT") ||
+                parameters.get("IMAGE_HEIGHT") == null)
+            return this.height;
+        return Integer.parseInt(parameters.get("IMAGE_HEIGHT").toString());
     }
 
     public ImageHandler getImageHandler() {
