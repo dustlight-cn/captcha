@@ -22,6 +22,7 @@
 * [核心模块](#核心模块)
 * [拓展模块](#拓展模块)
 * [获取帮助](#获取帮助)
+* [常见问题](#常见问题)
 
 ## 快速入门
 > 下面将演示如何实现字符型图片验证码业务，在开始之前请先创建一个 Spring Boot 的 Web 项目。
@@ -158,3 +159,6 @@ public class TestController {
 
 ## 获取帮助
 如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/dustlight-cn/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
+
+## 常见问题
+[邮箱验证码参数获取失败](extensions/email-sender#验证码参数获取失败)
