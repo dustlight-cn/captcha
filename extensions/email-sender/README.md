@@ -111,3 +111,45 @@ public class EmailController {
 
 ## 获取帮助
 如果需要报告问题或者功能需求，请在Github中 [创建issue](https://github.com/dustlight-cn/captcha/issues/new) 。若有其他问题或建议，请发送电子邮件至 [hansin@dustlight.cn](mailto:hansin@dustlight.cn)
+## 常见问题
+### 验证码参数获取失败
+发送邮件时，模板引擎无法找到参数：
+```
+----
+FTL stack trace ("~" means nesting-related):
+        - Failed at: ${code}  [in template "mail/EmailCode.html" at line 8, column 12]
+----
+        at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:134) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.EvalUtil.coerceModelToTextualCommon(EvalUtil.java:481) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.EvalUtil.coerceModelToStringOrMarkup(EvalUtil.java:401) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.EvalUtil.coerceModelToStringOrMarkup(EvalUtil.java:370) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.DollarVariable.calculateInterpolatedStringOrMarkup(DollarVariable.java:100) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.DollarVariable.accept(DollarVariable.java:63) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.Environment.visit(Environment.java:334) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.Environment.visit(Environment.java:340) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.core.Environment.process(Environment.java:313) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at freemarker.template.Template.process(Template.java:383) ~[freemarker-2.3.30.jar!/:2.3.30]
+        at org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString(FreeMarkerTemplateUtils.java:50) ~[spring-context-support-5.2.10.RELEASE.jar!/:5.2.10.RELEASE]
+        at cn.dustlight.captcha.sender.EmailCodeSender$DefaultTemplateProvider.getTemplateContent(EmailCodeSender.java:100) ~[email-sender-0.0.4.jar!/:0.0.4]
+        at cn.dustlight.captcha.sender.EmailCodeSender.getTemplate(EmailCodeSender.java:76) ~[email-sender-0.0.4.jar!/:0.0.4]
+        at cn.dustlight.captcha.sender.EmailCodeSender.send(EmailCodeSender.java:39) ~[email-sender-0.0.4.jar!/:0.0.4]
+        ... 101 common frames omitted
+```
+原因为 Java 在编译时出于安全等原因的考虑，导致编译后的方法参数名并非是原参数名，而是 ```arg0, arg1, argN...``` 的形式。
+在编译时添加参数 ```-parameters``` 即可保留原参数名。例如：```javac -parameters XX.java```
+
+在 Maven 项目的编译选项添加配置 ```<arg>-parameters</arg>```：
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.3</version>
+    <configuration>
+        <source>1.8</source>
+        <target>1.8</target>
+        <compilerArgs>
+            <arg>-parameters</arg>
+        </compilerArgs>
+    </configuration>
+</plugin>
+```
