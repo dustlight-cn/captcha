@@ -1,6 +1,7 @@
 package cn.dustlight.captcha.sender;
 
 import cn.dustlight.captcha.core.Code;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -107,8 +108,13 @@ public class SimpleImageCodeSender<T> implements CodeSender<T> {
 
         public DefaultImageHandler(String... fontNames) {
             this.secureRandom = new SecureRandom();
-            Collection<String> availableFonts = Arrays.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-            if (fontNames != null) {
+            Collection<String> availableFonts = null;
+            try {
+                availableFonts = Arrays.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+            } catch (NullPointerException e) {
+                LoggerFactory.getLogger(getClass()).error("GraphicsEnvironment Error", e);
+            }
+            if (availableFonts != null && fontNames != null) {
                 for (String fn : fontNames) {
                     if (fn != null && fn.trim().length() > 0 && availableFonts.contains(fn)) {
                         this.font = fn;

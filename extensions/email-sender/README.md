@@ -12,7 +12,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>email-sender</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
