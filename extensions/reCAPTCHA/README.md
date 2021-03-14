@@ -13,7 +13,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>recaptcha</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 </dependency>
 ```
 

@@ -5,7 +5,7 @@
     <parent>
         <groupId>cn.dustlight.captcha</groupId>
         <artifactId>captcha</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>email-sender</artifactId>

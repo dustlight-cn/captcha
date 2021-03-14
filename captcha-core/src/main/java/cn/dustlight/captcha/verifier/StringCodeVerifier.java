@@ -61,6 +61,10 @@ public class StringCodeVerifier implements CodeVerifier<String> {
         public boolean verify(String code, String target) {
             if (code == null || target == null)
                 return enabledNull ? code == target : false;
+            if (!caseSensitive) {
+                code = code.toUpperCase();
+                target = target.toUpperCase();
+            }
             return trim ? code.trim().equals(target.trim()) : code.equals(target);
         }
 
