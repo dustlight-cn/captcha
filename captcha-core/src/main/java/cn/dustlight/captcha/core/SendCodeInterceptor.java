@@ -14,9 +14,11 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
+import java.util.Vector;
 
 public class SendCodeInterceptor implements MethodBeforeAdvice, Ordered {
 
@@ -66,6 +68,29 @@ public class SendCodeInterceptor implements MethodBeforeAdvice, Ordered {
                     String key = codeParamAnnotation.value().length() > 0 ? codeParamAnnotation.value() : params[i].getName();
                     Object value = objects[i] != null ? objects[i] : codeParamAnnotation.defaultValue();
                     code.getData().put(key, value); // 存储验证码参数
+                } else if (objects[i] != null) {
+                    Class<?> paramType = params[i].getType();
+                    Vector<Util.AnnotationField<CodeValue>> codeValues = Util.AnnotationFieldFinder.get(CodeValue.class).find(paramType);
+                    Vector<Util.AnnotationField<CodeParam>> codeParams = Util.AnnotationFieldFinder.get(CodeParam.class).find(paramType);
+                    if (codeValues != null)
+                        for (Util.AnnotationField<CodeValue> field : codeValues) {
+                            if (!field.getAnnotation().value().equals(sendCodeAnnotation.value()))
+                                continue;
+                            Field f = field.getField();
+                            field.write(objects[i], codeValue);
+                            parameters.put(f.getName(), codeValue);
+                        }
+                    if (codeParams != null)
+                        for (Util.AnnotationField<CodeParam> field : codeParams) {
+                            if (!field.getAnnotation().value().equals(sendCodeAnnotation.value()))
+                                continue;
+                            Field f = field.getField();
+                            String key = field.getAnnotation().value().length() > 0 ? field.getAnnotation().value() : f.getName();
+                            Object value = field.read(objects[i]);
+                            if (value == null)
+                                value = field.getAnnotation().defaultValue();
+                            code.getData().put(key, value); // 存储验证码参数
+                        }
                 }
             }
         }

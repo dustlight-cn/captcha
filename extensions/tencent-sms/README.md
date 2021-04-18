@@ -20,7 +20,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>tencent-sms</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 </dependency>
 ```
 

@@ -14,12 +14,15 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
+import java.util.Vector;
 
 public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
 
+    public static final String CHANCE_KEY = "CHANCE";
     private BeanFactory factory;
     private int order;
     private DefaultBeanProperties defaultBeanProperties;
@@ -29,9 +32,9 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
     }
 
     boolean checkChance(Code code, int chance) {
-        if (code.getData().get("CHANCE") == null)
+        if (code.getData().get(CHANCE_KEY) == null)
             return true;
-        Integer CHANCE = Integer.valueOf(code.getData().get("CHANCE").toString());
+        Integer CHANCE = Integer.valueOf(code.getData().get(VerifyCodeInterceptor.CHANCE_KEY).toString());
         if (CHANCE >= chance)
             return false;
         return true;
@@ -39,12 +42,12 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
 
     @SuppressWarnings("unchecked")
     void addChanceCount(Code code) {
-        if (code.getData().get("CHANCE") == null) {
-            code.getData().put("CHANCE", 1);
+        if (code.getData().get(CHANCE_KEY) == null) {
+            code.getData().put(CHANCE_KEY, 1);
             return;
         }
-        Integer CHANCE = Integer.valueOf(code.getData().get("CHANCE").toString());
-        code.getData().put("CHANCE", CHANCE + 1);
+        Integer CHANCE = Integer.valueOf(code.getData().get(VerifyCodeInterceptor.CHANCE_KEY).toString());
+        code.getData().put(VerifyCodeInterceptor.CHANCE_KEY, CHANCE + 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -67,9 +70,8 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
 
         Code code = store.load(verifyCodeAnnotation.value(), parameters);
         Object codeValue = code.getValue();
-        Object targetValue = parameters.get(verifyCodeAnnotation.value());
+        Object targetValue = parameters.get(verifyCodeAnnotation.value()); // 先取同名参数值为默认值，之后再扫描 @CodeValue 替代
         Parameter[] params = method.getParameters();
-
 
         if (params != null && objects != null) {
             for (int i = 0, len = Math.min(params.length, objects.length); i < len; i++) {
@@ -87,6 +89,30 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
                     if (value == null && params[i].getType().isAssignableFrom(String.class))
                         value = codeParamAnnotation.defaultValue();
                     objects[i] = code.getData().getOrDefault(key, value); // 将验证码参数注入方法参数
+                } else if (objects[i] != null) {
+                    Class<?> paramType = params[i].getType();
+                    Vector<Util.AnnotationField<CodeValue>> codeValues = Util.AnnotationFieldFinder.get(CodeValue.class).find(paramType);
+                    Vector<Util.AnnotationField<CodeParam>> codeParams = Util.AnnotationFieldFinder.get(CodeParam.class).find(paramType);
+                    if (codeValues != null)
+                        for (Util.AnnotationField<CodeValue> field : codeValues) {
+                            if (!field.getAnnotation().value().equals(verifyCodeAnnotation.value()))
+                                continue;
+                            Field f = field.getField();
+                            targetValue = field.read(objects[i]);
+                            field.write(objects[i], codeValue);
+                            parameters.put(f.getName(), codeValue);
+                        }
+                    if (codeParams != null)
+                        for (Util.AnnotationField<CodeParam> field : codeParams) {
+                            if (!field.getAnnotation().value().equals(verifyCodeAnnotation.value()))
+                                continue;
+                            Field f = field.getField();
+                            String key = field.getAnnotation().value().length() > 0 ? field.getAnnotation().value() : f.getName();
+                            Object value = code.getData() == null ? null : code.getData().get(key);
+                            if (value == null && f.getType().isAssignableFrom(String.class))
+                                value = field.getAnnotation().defaultValue();
+                            field.write(objects[i], code.getData().getOrDefault(key, value));
+                        }
                 }
             }
         }
