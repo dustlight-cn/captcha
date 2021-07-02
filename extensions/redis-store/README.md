@@ -11,7 +11,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>redis-store</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8-SNAPSHOT</version>
 </dependency>
 ```
 

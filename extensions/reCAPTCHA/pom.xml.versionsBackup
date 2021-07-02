@@ -5,12 +5,12 @@
     <parent>
         <groupId>cn.dustlight.captcha</groupId>
         <artifactId>captcha</artifactId>
-        <version>0.0.8-SNAPSHOT</version>
+        <version>0.0.7</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>tencent-sms</artifactId>
-    <name>tencent-sms</name>
-    <description>CAPTCHA service Tencent Short Message Service module</description>
+    <artifactId>recaptcha</artifactId>
+    <name>recaptcha</name>
+    <description>CAPTCHA service Google reCAPTCHA module</description>
 
     <dependencies>
         <dependency>
@@ -19,17 +19,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.304</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
