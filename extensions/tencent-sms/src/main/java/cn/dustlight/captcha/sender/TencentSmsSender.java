@@ -7,9 +7,13 @@ import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
+import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
+import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 import org.springframework.util.StringUtils;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class TencentSmsSender implements CodeSender<String> {
 
@@ -66,7 +70,20 @@ public class TencentSmsSender implements CodeSender<String> {
                 paramSet = new String[]{code.getValue()};
             request.setTemplateParamSet(paramSet);
 
-            this.client.SendSms(request);
+            SendSmsResponse rsp = this.client.SendSms(request);
+            SendStatus[] statusSet = rsp.getSendStatusSet();
+            Set<SendStatus> errorSet = null;
+            if(statusSet != null){
+                for (SendStatus status : statusSet){
+                    if(!status.getCode().equals("Ok")){
+                        if(errorSet == null)
+                            errorSet = new LinkedHashSet<>();
+                        errorSet.add(status);
+                    }
+                }
+                if(errorSet != null && errorSet.size() > 0)
+                    throw new SendCodeException("Fail to send email code. (Tencent SMS) " + this.client.gson.toJson(errorSet));
+            }
         } catch (Exception e) {
             if (e instanceof SendCodeException)
                 throw (SendCodeException) e;
