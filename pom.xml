@@ -19,6 +19,7 @@
         <module>captcha-core</module>
         <module>extensions/redis-store</module>
         <module>extensions/tencent-sms</module>
+        <module>extensions/aliyun-sms</module>
         <module>extensions/reCAPTCHA</module>
         <module>extensions/email-sender</module>
     </modules>

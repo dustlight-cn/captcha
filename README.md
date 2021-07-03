@@ -9,7 +9,7 @@
 
 ## 示例
 * [图片验证码](#快速入门)
-* [短信验证码](extensions/tencent-sms)
+* [腾讯云短信验证码](extensions/tencent-sms) / [阿里云短信验证码](extensions/aliyun-sms)
 * [邮箱验证码](extensions/email-sender)
 * [谷歌 reCAPTCHA](extensions/reCAPTCHA)
 * [使用 Redis 储存验证码](extensions/redis-store)
@@ -144,6 +144,12 @@ public class TestController {
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/tencent-sms?server=https%3A%2F%2Foss.sonatype.org%2F)
 
 提供基于腾讯云短信服务的验证码发送功能。
+
+### [aliyun-sms](extensions/aliyun-sms)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/aliyun-sms?server=https%3A%2F%2Foss.sonatype.org%2F)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/cn.dustlight.captcha/aliyun-sms?server=https%3A%2F%2Foss.sonatype.org%2F)
+
+提供基于阿里云短信服务的验证码发送功能。
 
 ### [reCAPTCHA](extensions/reCAPTCHA)
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/r/cn.dustlight.captcha/recaptcha?server=https%3A%2F%2Foss.sonatype.org%2F)
