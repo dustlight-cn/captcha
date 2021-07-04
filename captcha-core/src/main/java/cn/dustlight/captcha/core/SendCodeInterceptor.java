@@ -65,7 +65,7 @@ public class SendCodeInterceptor implements MethodBeforeAdvice, Ordered {
                     parameters.put(params[i].getName(), codeValue); // 更新参数表
                 } else if ((codeParamAnnotation = AnnotationUtils.findAnnotation(params[i], CodeParam.class)) != null &&
                         codeParamAnnotation.value().equals(sendCodeAnnotation.value())) {
-                    String key = codeParamAnnotation.value().length() > 0 ? codeParamAnnotation.value() : params[i].getName();
+                    String key = codeParamAnnotation.name().length() > 0 ? codeParamAnnotation.name() : params[i].getName();
                     Object value = objects[i] != null ? objects[i] : codeParamAnnotation.defaultValue();
                     code.getData().put(key, value); // 存储验证码参数
                 } else if (objects[i] != null) {
@@ -85,7 +85,7 @@ public class SendCodeInterceptor implements MethodBeforeAdvice, Ordered {
                             if (!field.getAnnotation().value().equals(sendCodeAnnotation.value()))
                                 continue;
                             Field f = field.getField();
-                            String key = field.getAnnotation().value().length() > 0 ? field.getAnnotation().value() : f.getName();
+                            String key = field.getAnnotation().name().length() > 0 ? field.getAnnotation().name() : f.getName();
                             Object value = field.read(objects[i]);
                             if (value == null)
                                 value = field.getAnnotation().defaultValue();

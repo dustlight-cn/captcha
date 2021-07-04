@@ -84,7 +84,7 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
                     parameters.put(params[i].getName(), codeValue); // 更新参数表
                 } else if ((codeParamAnnotation = AnnotationUtils.findAnnotation(params[i], CodeParam.class)) != null &&
                         codeParamAnnotation.value().equals(verifyCodeAnnotation.value())) {
-                    String key = codeParamAnnotation.value().length() > 0 ? codeParamAnnotation.value() : params[i].getName();
+                    String key = codeParamAnnotation.name().length() > 0 ? codeParamAnnotation.name() : params[i].getName();
                     Object value = code.getData() == null ? null : code.getData().get(key);
                     if (value == null && params[i].getType().isAssignableFrom(String.class))
                         value = codeParamAnnotation.defaultValue();
@@ -107,7 +107,7 @@ public class VerifyCodeInterceptor implements MethodBeforeAdvice, Ordered {
                             if (!field.getAnnotation().value().equals(verifyCodeAnnotation.value()))
                                 continue;
                             Field f = field.getField();
-                            String key = field.getAnnotation().value().length() > 0 ? field.getAnnotation().value() : f.getName();
+                            String key = field.getAnnotation().name().length() > 0 ? field.getAnnotation().name() : f.getName();
                             Object value = code.getData() == null ? null : code.getData().get(key);
                             if (value == null && f.getType().isAssignableFrom(String.class))
                                 value = field.getAnnotation().defaultValue();
