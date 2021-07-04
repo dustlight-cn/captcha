@@ -33,7 +33,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>captcha-core</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.8</version>
 </dependency>
 ```
 
