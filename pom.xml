@@ -48,6 +48,11 @@
             </dependency>
             <dependency>
                 <groupId>cn.dustlight.captcha</groupId>
+                <artifactId>aliyun-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dustlight.captcha</groupId>
                 <artifactId>redis-store</artifactId>
                 <version>${project.version}</version>
             </dependency>
