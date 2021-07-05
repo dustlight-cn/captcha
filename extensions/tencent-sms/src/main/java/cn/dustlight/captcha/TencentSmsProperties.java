@@ -2,6 +2,9 @@ package cn.dustlight.captcha;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @ConfigurationProperties("dustlight.captcha.sender.tencent.sms")
 public class TencentSmsProperties {
 
@@ -15,6 +18,43 @@ public class TencentSmsProperties {
     private String phoneParamName = "phone";
 
     private Integer httpProxyPort, httpTimeout = 60;
+
+    private Map<String,String> appIds = new HashMap<>();
+    private Map<String,String> signs = new HashMap<>();
+    private Map<String,String> senderIds = new HashMap<>();
+    private Map<String,String> templateIds = new HashMap<>();
+
+    public Map<String, String> getAppIds() {
+        return appIds;
+    }
+
+    public void setAppIds(Map<String, String> appIds) {
+        this.appIds = appIds;
+    }
+
+    public Map<String, String> getSigns() {
+        return signs;
+    }
+
+    public void setSigns(Map<String, String> signs) {
+        this.signs = signs;
+    }
+
+    public Map<String, String> getSenderIds() {
+        return senderIds;
+    }
+
+    public void setSenderIds(Map<String, String> senderIds) {
+        this.senderIds = senderIds;
+    }
+
+    public Map<String, String> getTemplateIds() {
+        return templateIds;
+    }
+
+    public void setTemplateIds(Map<String, String> templateIds) {
+        this.templateIds = templateIds;
+    }
 
     public String getPhoneParamName() {
         return phoneParamName;

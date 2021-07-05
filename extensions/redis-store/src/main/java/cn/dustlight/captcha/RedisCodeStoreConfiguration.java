@@ -13,7 +13,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 public class RedisCodeStoreConfiguration {
 
     @Bean
-    @ConditionalOnBean(value = {RedisConnectionFactory.class})
     public RedisCodeStore redisCodeStore(@Autowired RedisCodeStoreProperties properties,
                                          @Autowired RedisConnectionFactory factory) {
         return new RedisCodeStore(factory, properties.getKeyPrefix());

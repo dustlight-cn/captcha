@@ -73,15 +73,15 @@ public class TencentSmsSender implements CodeSender<String> {
             SendSmsResponse rsp = this.client.SendSms(request);
             SendStatus[] statusSet = rsp.getSendStatusSet();
             Set<SendStatus> errorSet = null;
-            if(statusSet != null){
-                for (SendStatus status : statusSet){
-                    if(!status.getCode().equals("Ok")){
-                        if(errorSet == null)
+            if (statusSet != null) {
+                for (SendStatus status : statusSet) {
+                    if (!status.getCode().equals("Ok")) {
+                        if (errorSet == null)
                             errorSet = new LinkedHashSet<>();
                         errorSet.add(status);
                     }
                 }
-                if(errorSet != null && errorSet.size() > 0)
+                if (errorSet != null && errorSet.size() > 0)
                     throw new SendCodeException("Fail to send email code. (Tencent SMS) " + this.client.gson.toJson(errorSet));
             }
         } catch (Exception e) {
@@ -105,19 +105,23 @@ public class TencentSmsSender implements CodeSender<String> {
     }
 
     protected String getAppId(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault("APP_ID", properties.getDefaultAppId());
+        String key = (String) parameters.getOrDefault("APP_ID", properties.getDefaultAppId());
+        return properties.getAppIds().getOrDefault(key, key);
     }
 
     protected String getSign(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault("SIGN", properties.getDefaultSign());
+        String key = (String) parameters.getOrDefault("SIGN", properties.getDefaultSign());
+        return properties.getSigns().getOrDefault(key, key);
     }
 
     protected String getSenderId(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault("SENDER_ID", properties.getDefaultSenderId());
+        String key = (String) parameters.getOrDefault("SENDER_ID", properties.getDefaultSenderId());
+        return properties.getSenderIds().getOrDefault(key, key);
     }
 
     protected String getTemplateId(Map<String, Object> parameters) {
-        return (String) parameters.getOrDefault("TEMPLATE_ID", properties.getDefaultTemplateId());
+        String key = (String) parameters.getOrDefault("TEMPLATE_ID", properties.getDefaultTemplateId());
+        return properties.getTemplateIds().getOrDefault(key, key);
     }
 
     protected String getPhoneParamName() {
