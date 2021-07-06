@@ -19,7 +19,7 @@
 <dependency>
     <groupId>cn.dustlight.captcha</groupId>
     <artifactId>aliyun-sms</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
