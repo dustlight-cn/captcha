@@ -2,7 +2,6 @@ package cn.dustlight.captcha;
 
 import cn.dustlight.captcha.sender.EmailCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,7 +18,6 @@ public class EmailSenderConfiguration {
     }
 
     @Bean
-    @ConditionalOnBean(value = {JavaMailSender.class})
     public EmailCodeSender emailCodeSender(@Autowired EmailSenderProperties properties,
                                            @Autowired MailProperties mailProperties,
                                            @Autowired JavaMailSender javaMailSender,
